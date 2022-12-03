@@ -1,0 +1,99 @@
+<html lang="en">
+  <head>
+    <style>
+      body { margin: 50px; }
+      th {
+        width: 200px;
+        text-align: center;
+      } 
+      tr td {
+        padding: 20px;
+      }
+      td div {
+        width: 100%;
+        padding-bottom: 100%;
+        background-size: 100%;
+      }
+      td.james div {
+        background-image: url("james.jpg");
+      }
+      td.beth div {
+        background-image: url("beth.jpg");
+      }
+      td.today {
+        background-color: lightgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <th>Friday</th>
+        <th>Saturday</th>
+        <th>Sunday</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+      </tr>
+      <tr>
+        <td id="1" class="james"><div/></td>
+        <td id="2" class="james"><div/></td>
+        <td id="3" class="james"><div/></td>
+        <td id="4" class="beth"><div/></td>
+        <td id="5" class="james"><div/></td>
+        <td id="6" class="james"><div/></td>
+        <td id="7" class="james"><div/></td>
+      </tr>
+      <tr>
+        <td id="8" class="beth"><div/></td>
+        <td id="9" class="beth"><div/></td>
+        <td id="10" class="beth"><div/></td>
+        <td id="11" class="james"><div/></td>
+        <td id="12" class="beth"><div/></td>
+        <td id="13" class="beth"><div/></td>
+        <td id="14" class="beth"><div/></td>
+      </tr>
+      <tr>
+        <td id="15" class="james"><div/></td>
+        <td id="16" class="james"><div/></td>
+        <td id="17" class="james"><div/></td>
+        <td id="18" class="beth"><div/></td>
+        <td id="19" class="james"><div/></td>
+        <td id="20" class="james"><div/></td>
+        <td id="21" class="james"><div/></td>
+      </tr>
+      <tr>
+        <td id="22" class="beth"><div/></td>
+        <td id="23" class="beth"><div/></td>
+        <td id="24" class="beth"><div/></td>
+        <td id="25" class="james"><div/></td>
+        <td id="26" class="beth"><div/></td>
+        <td id="27" class="beth"><div/></td>
+        <td id="28" class="beth"><div/></td>
+      </tr>
+    </table>
+  </body>
+    <script type="text/javascript">
+      const currentDate = new Date();
+      const epochMinutes = (currentDate.getTime() / 1000 / 60) - currentDate.getTimezoneOffset();
+      const today = Math.floor(((epochMinutes / 60 / 24) + 6) % 14) + 1;
+      document.getElementById(today.toString()).classList.add("today");
+      document.body.onkeydown = function(e) {
+        if (e.key == " " ||
+            e.code == "Space" ||      
+            e.keyCode == 32      
+        ) {
+          e.preventDefault();
+          const today = document.getElementsByClassName("today")[0];
+          today.classList.remove("today");
+          let id = parseInt(today.id);
+          id = id + 1;
+          if (id > 28) {
+            id = 1;
+          }
+          document.getElementById(id.toString()).classList.add("today");
+        }
+      };
+    </script>
+</html>

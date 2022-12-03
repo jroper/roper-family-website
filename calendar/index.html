@@ -88,21 +88,25 @@
       const todayElem = document.getElementById(today.toString());
       todayElem.classList.add("today");
       todayElem.classList.add("selected");
+      function nextDay() {
+        const selected = document.getElementsByClassName("selected")[0];
+        selected.classList.remove("selected");
+        let id = parseInt(selected.id);
+        id = id + 1;
+        if (id > 28) {
+          id = 1;
+        }
+        document.getElementById(id.toString()).classList.add("selected");
+      }
       document.body.onkeydown = function(e) {
         if (e.key == " " ||
             e.code == "Space" ||      
             e.keyCode == 32      
         ) {
           e.preventDefault();
-          const selected = document.getElementsByClassName("selected")[0];
-          selected.classList.remove("selected");
-          let id = parseInt(selected.id);
-          id = id + 1;
-          if (id > 28) {
-            id = 1;
-          }
-          document.getElementById(id.toString()).classList.add("selected");
+          nextDay();
         }
       };
+      document.body.addEventListener("touchstart", nextDay);
     </script>
 </html>

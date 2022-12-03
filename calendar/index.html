@@ -8,7 +8,7 @@
         text-align: center;
       } 
       tr td {
-        padding: 20px;
+        padding: 10px;
       }
       td div {
         width: 100%;
@@ -21,8 +21,14 @@
       td.beth div {
         background-image: url("beth.jpg");
       }
+      td {
+        border: 5px solid white;
+      }
       td.today {
         background-color: lightgreen;
+      }
+      td.selected {
+        border-color: black;
       }
     </style>
   </head>
@@ -79,21 +85,23 @@
       const currentDate = new Date();
       const epochMinutes = (currentDate.getTime() / 1000 / 60) - currentDate.getTimezoneOffset();
       const today = Math.floor(((epochMinutes / 60 / 24) + 6) % 14) + 1;
-      document.getElementById(today.toString()).classList.add("today");
+      const todayElem = document.getElementById(today.toString());
+      todayElem.classList.add("today");
+      todayElem.classList.add("selected");
       document.body.onkeydown = function(e) {
         if (e.key == " " ||
             e.code == "Space" ||      
             e.keyCode == 32      
         ) {
           e.preventDefault();
-          const today = document.getElementsByClassName("today")[0];
-          today.classList.remove("today");
-          let id = parseInt(today.id);
+          const selected = document.getElementsByClassName("selected")[0];
+          selected.classList.remove("selected");
+          let id = parseInt(selected.id);
           id = id + 1;
           if (id > 28) {
             id = 1;
           }
-          document.getElementById(id.toString()).classList.add("today");
+          document.getElementById(id.toString()).classList.add("selected");
         }
       };
     </script>
